@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tetris</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div id="menu-principal">
+      <h1 data-i18n="titulo" class="titulo-arcade">Tetris</h1>
+
+      <div class="fila-switches">
+        <div id="selector-idioma-menu">
+          <button data-idioma="es" class="boton-idioma">🇪🇸</button>
+          <button data-idioma="en" class="boton-idioma">🇬🇧</button>
+        </div>
+        <button class="boton-tema"></button>
+      </div>
+
+      <div class="bloque-record">
+        <h2 data-i18n="record">Récord</h2>
+        <div class="caja-record">
+          <span id="record-texto-menu" class="valor-record">0</span>
+        </div>
+      </div>
+
+      <div class="grupo-config">
+        <h2 data-i18n="etiquetaDificultad">Dificultad</h2>
+        <select id="selector-dificultad">
+          <option value="facil" data-i18n="dificultadFacil">Fácil</option>
+          <option value="normal" data-i18n="dificultadNormal">Normal</option>
+          <option value="dificil" data-i18n="dificultadDificil">Difícil</option>
+        </select>
+      </div>
+
+      <div class="grupo-config">
+        <h2 data-i18n="etiquetaControles">Controles</h2>
+        <div class="fila-control">
+          <label for="control-izquierda" data-i18n="controlIzquierda"
+            >Mover izquierda</label
+          >
+          <select id="control-izquierda"></select>
+        </div>
+
+        <div class="fila-control">
+          <label for="control-derecha" data-i18n="controlDerecha"
+            >Mover derecha</label
+          >
+          <select id="control-derecha"></select>
+        </div>
+
+        <div class="fila-control">
+          <label for="control-rotar" data-i18n="controlRotar">Rotar</label>
+          <select id="control-rotar"></select>
+        </div>
+
+        <div class="fila-control">
+          <label for="control-pausar" data-i18n="controlPausar">Pausar</label>
+          <select id="control-pausar"></select>
+        </div>
+
+        <div class="fila-control">
+          <label for="control-reiniciar" data-i18n="controlReiniciar"
+            >Reiniciar</label
+          >
+          <select id="control-reiniciar"></select>
+        </div>
+      </div>
+
+      <button id="boton-jugar" data-i18n="botonJugar" class="boton-principal">
+        Jugar
+      </button>
+    </div>
+
+    <div
+      id="contenedor-juego"
+      class="contenedor-principal"
+      style="display: none"
+    >
+      <div class="contenedor-tablero">
+        <canvas id="tablero" width="300" height="600"></canvas>
+        <div id="overlay-estado" class="overlay-estado oculto">
+          <h3 id="overlay-titulo"></h3>
+          <p id="overlay-texto"></p>
+        </div>
+      </div>
+
+      <div class="panel-lateral">
+        <div class="fila-switches">
+          <div id="selector-idioma-juego">
+            <button data-idioma="es" class="boton-idioma">🇪🇸</button>
+            <button data-idioma="en" class="boton-idioma">🇬🇧</button>
+          </div>
+          <button class="boton-tema"></button>
+        </div>
+
+        <div class="dato-marcador">
+          <h3 data-i18n="etiquetaDificultad">Dificultad</h3>
+          <div class="valor" id="dificultad-texto">Normal</div>
+        </div>
+
+        <h3 data-i18n="siguientePieza">Siguiente pieza</h3>
+        <canvas id="siguiente" width="90" height="90"></canvas>
+
+        <div class="dato-marcador">
+          <h3 data-i18n="puntuacion">Puntuación</h3>
+          <div class="valor"><span id="puntuacion-texto">0</span></div>
+        </div>
+        <div class="dato-marcador">
+          <h3 data-i18n="nivel">Nivel</h3>
+          <div class="valor"><span id="nivel-texto">1</span></div>
+        </div>
+        <div class="dato-marcador">
+          <h3 data-i18n="record">Récord</h3>
+          <div class="valor"><span id="record-texto-panel">0</span></div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>

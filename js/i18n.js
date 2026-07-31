@@ -25,6 +25,8 @@ const TRADUCCIONES = {
     temaOscuro: "🌙 Modo oscuro",
     temaClaro: "☀️ Modo claro",
     tituloEspacio: "Espacio",
+    textoPausaTactil: "Toca dos veces la pantalla para continuar",
+    textoGameOverTactil: "Guardando tu puntuación...",
   },
   en: {
     titulo: "Tetris",
@@ -50,6 +52,8 @@ const TRADUCCIONES = {
     temaOscuro: "🌙 Dark mode",
     temaClaro: "☀️ Light mode",
     tituloEspacio: "Space",
+    textoPausaTactil: "Double-tap the screen to continue",
+    textoGameOverTactil: "Saving your score...",
   },
 };
 

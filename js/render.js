@@ -132,22 +132,19 @@ export function actualizarOverlay(
   idioma,
   teclaReiniciar,
   teclaPausar,
+  esTactil = false,
 ) {
   if (juegoTerminado) {
     overlayTitulo.textContent = traducir("tituloGameOver", idioma);
-    overlayTexto.textContent = traducirConTecla(
-      "textoGameOver",
-      idioma,
-      teclaReiniciar,
-    );
+    overlayTexto.textContent = esTactil
+      ? traducir("textoGameOverTactil", idioma)
+      : traducirConTecla("textoGameOver", idioma, teclaReiniciar);
     overlay.classList.remove("oculto");
   } else if (juegoPausado) {
     overlayTitulo.textContent = traducir("tituloPausa", idioma);
-    overlayTexto.textContent = traducirConTecla(
-      "textoPausa",
-      idioma,
-      teclaPausar,
-    );
+    overlayTexto.textContent = esTactil
+      ? traducir("textoPausaTactil", idioma)
+      : traducirConTecla("textoPausa", idioma, teclaPausar);
     overlay.classList.remove("oculto");
   } else {
     overlay.classList.add("oculto");

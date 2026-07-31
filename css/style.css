@@ -449,3 +449,9 @@ body {
     font-size: 1.4rem;
   }
 }
+
+@media (pointer: coarse) {
+  #config-teclado {
+    display: none;
+  }
+}

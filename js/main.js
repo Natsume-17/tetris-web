@@ -17,7 +17,11 @@ import {
   actualizarMarcador,
   actualizarOverlay,
 } from "./render.js";
-import { configurarTeclado, configurarBotonJugar } from "./controles.js";
+import {
+  configurarTeclado,
+  configurarBotonJugar,
+  configurarTactil,
+} from "./controles.js";
 import { inicializarTema } from "./tema.js";
 import { obtenerRecord, guardarRecordSiSupera } from "./record.js";
 import {
@@ -40,6 +44,7 @@ import {
 
 // --- Referencias al DOM ---
 const canvas = document.getElementById("tablero");
+const contenedorTablero = document.querySelector(".contenedor-tablero");
 const contexto = canvas.getContext("2d");
 const canvasSiguiente = document.getElementById("siguiente");
 const contextoSiguiente = canvasSiguiente.getContext("2d");
@@ -78,6 +83,7 @@ let juegoTerminado = false;
 let animandoLineas = false;
 let temporizadorRedireccion = null;
 let controlesActivos = { ...CONTROLES_POR_DEFECTO };
+const esTactil = window.matchMedia("(pointer: coarse)").matches;
 
 // --- Lógica de piezas ---
 function generarPiezaAleatoria() {
@@ -162,6 +168,7 @@ function alternarPausa() {
     obtenerIdioma(),
     controlesActivos.reiniciar,
     controlesActivos.pausar,
+    esTactil,
   );
 }
 
@@ -235,6 +242,7 @@ function actualizar() {
     obtenerIdioma(),
     controlesActivos.reiniciar,
     controlesActivos.pausar,
+    esTactil,
   );
 }
 
@@ -284,6 +292,17 @@ function iniciarJuego() {
     rotar: rotarPieza,
     pausar: alternarPausa,
     reiniciar: reiniciarJuego,
+  });
+
+  configurarTactil(contenedorTablero, {
+    moverIzquierda: function () {
+      moverPieza(-1);
+    },
+    moverDerecha: function () {
+      moverPieza(1);
+    },
+    rotar: rotarPieza,
+    pausar: alternarPausa,
   });
 
   menuPrincipal.style.display = "none";
@@ -352,6 +371,7 @@ function aplicarIdioma(idioma) {
     obtenerIdioma(),
     controlesActivos.reiniciar,
     controlesActivos.pausar,
+    esTactil,
   );
 
   botonesIdioma.forEach(function (boton) {

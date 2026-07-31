@@ -1,0 +1,451 @@
+:root {
+  --color-fondo: #1e1e1e;
+  --color-panel: #2a2a2a;
+  --color-texto: #f0f0f0;
+  --color-texto-secundario: #a0a0a0;
+  --color-acento: #00f0f0;
+  --color-borde: #3a3a3a;
+  --color-tablero-fondo: #000000;
+}
+
+body.tema-claro {
+  --color-fondo: #f0f0f0;
+  --color-panel: #ffffff;
+  --color-texto: #1e1e1e;
+  --color-texto-secundario: #555555;
+  --color-acento: #6a00f0;
+  --color-borde: #d0d0d0;
+  --color-tablero-fondo: #f8f8f8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  font-family: "Segoe UI", sans-serif;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+.contenedor-principal {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+#tablero {
+  border: 4px solid var(--color-acento);
+  background-color: var(--color-tablero-fondo);
+  border-radius: 4px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.panel-lateral {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: var(--color-panel);
+  border: 1px solid var(--color-borde);
+  border-radius: 8px;
+  padding: 16px 20px;
+  width: 265px;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.25);
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.panel-lateral h3 {
+  margin: 0 0 8px 0;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  color: var(--color-texto-secundario);
+  border-bottom: 1px solid var(--color-borde);
+  padding-bottom: 4px;
+}
+
+#siguiente {
+  border: 1px solid var(--color-borde);
+  border-radius: 4px;
+  display: block;
+  margin: 0 auto 8px auto;
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.25);
+}
+
+.dato-marcador {
+  margin-bottom: 12px;
+}
+
+.dato-marcador .valor {
+  font-family: "Press Start 2P", monospace;
+  font-size: 1.3rem;
+  font-weight: normal;
+  color: var(--color-acento);
+}
+
+.boton-tema {
+  background: none;
+  border: 1px solid var(--color-borde);
+  color: var(--color-texto);
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.4);
+}
+
+.boton-tema:hover {
+  border-color: var(--color-acento);
+  box-shadow:
+    inset 0 0 6px rgba(0, 0, 0, 0.4),
+    0 0 6px var(--color-acento);
+}
+
+#menu-principal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  text-align: center;
+  background-color: var(--color-panel);
+  border: 2px solid var(--color-acento);
+  border-radius: 12px;
+  box-shadow:
+    0 0 12px var(--color-acento),
+    0 0 32px rgba(0, 0, 0, 0.4);
+  padding: 40px 48px;
+}
+
+.boton-idioma {
+  background: none;
+  border: 1px solid var(--color-borde);
+  border-radius: 6px;
+  padding: 4px 8px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  opacity: 0.5;
+}
+
+.boton-idioma.activo {
+  opacity: 1;
+  border-color: var(--color-acento);
+}
+
+.contenedor-tablero {
+  position: relative;
+}
+
+.overlay-estado {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 4px;
+  transition: opacity 0.3s ease;
+}
+
+.overlay-estado h3 {
+  color: var(--color-acento);
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.overlay-estado p {
+  color: white;
+  font-size: 1rem;
+  font-weight: 400;
+  padding: 0 20px;
+  margin: 0;
+}
+
+.overlay-estado.oculto {
+  display: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes encendido-neon {
+    0%,
+    20% {
+      opacity: 0.2;
+      text-shadow: none;
+    }
+    30% {
+      opacity: 1;
+      text-shadow:
+        0 0 8px var(--color-acento),
+        0 0 16px var(--color-acento);
+    }
+    40% {
+      opacity: 0.3;
+      text-shadow: none;
+    }
+    50%,
+    100% {
+      opacity: 1;
+      text-shadow:
+        0 0 8px var(--color-acento),
+        0 0 20px var(--color-acento),
+        0 0 32px var(--color-acento);
+    }
+  }
+
+  .titulo-arcade {
+    animation: encendido-neon 1.4s ease-out forwards;
+  }
+}
+
+.titulo-arcade {
+  font-family: "Press Start 2P", monospace;
+  font-size: 2.5rem;
+  color: var(--color-acento);
+  text-shadow:
+    0 0 8px var(--color-acento),
+    0 0 20px var(--color-acento),
+    0 0 32px var(--color-acento);
+  margin: 0;
+  letter-spacing: 0.1em;
+}
+
+.fila-switches {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.grupo-config {
+  background-color: var(--color-panel);
+  border: 2px solid var(--color-borde);
+  border-radius: 8px;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+  min-width: 240px;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.25);
+}
+
+.grupo-config h2 {
+  margin: 0 0 8px 0;
+  font-size: 1.1rem;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-texto);
+  border-bottom: 1px solid var(--color-borde);
+  padding-bottom: 8px;
+}
+
+.grupo-config label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-texto);
+}
+
+.grupo-config > select {
+  align-self: center;
+  width: fit-content;
+}
+
+.fila-control {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.fila-control select {
+  width: fit-content;
+}
+
+.boton-principal {
+  background-color: var(--color-acento);
+  color: var(--color-fondo);
+  border: none;
+  border-radius: 8px;
+  padding: 12px 32px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    color 0.15s ease;
+}
+
+.boton-principal:hover {
+  color: #ffffff;
+  text-shadow:
+    0 0 6px #ffffff,
+    0 0 12px var(--color-acento);
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 16px var(--color-acento),
+    0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.boton-principal:active {
+  transform: translateY(0);
+  box-shadow: 0 0 4px var(--color-acento);
+}
+
+.bloque-record {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.bloque-record h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-texto);
+}
+
+.caja-record {
+  border: 1px solid var(--color-borde);
+  border-radius: 8px;
+  padding: 8px 15px 5px;
+  background-color: var(--color-fondo);
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.3);
+  width: fit-content;
+}
+
+.valor-record {
+  font-family: "Press Start 2P", monospace;
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: var(--color-acento);
+}
+
+@media (max-width: 1024px) {
+  .contenedor-principal {
+    gap: 16px;
+  }
+
+  #tablero {
+    width: 260px;
+    height: 520px;
+  }
+
+  .panel-lateral {
+    width: 180px;
+  }
+}
+
+@media (max-width: 700px) {
+  .contenedor-principal {
+    align-items: center;
+    gap: 12px;
+  }
+
+  #tablero {
+    width: 65vw;
+    max-width: 260px;
+    height: auto;
+    aspect-ratio: 1 / 2;
+  }
+
+  .panel-lateral {
+    width: 32vw;
+    max-width: 150px;
+    padding: 10px 12px;
+    gap: 12px;
+  }
+
+  #menu-principal {
+    padding: 24px;
+    width: 90vw;
+    max-width: 340px;
+    box-sizing: border-box;
+  }
+
+  .titulo-arcade {
+    font-size: 1.8rem;
+  }
+
+  .grupo-config {
+    min-width: unset;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .dato-marcador .valor {
+    font-size: 1rem;
+  }
+
+  .panel-lateral h3 {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .contenedor-principal {
+    align-items: center;
+    gap: 8px;
+  }
+
+  #tablero {
+    width: 62vw;
+    border-width: 2px;
+  }
+
+  .panel-lateral {
+    width: 30vw;
+    padding: 6px 8px;
+    gap: 8px;
+  }
+
+  .panel-lateral h3 {
+    font-size: 0.6rem;
+    letter-spacing: 0.02em;
+    padding-bottom: 2px;
+  }
+
+  .dato-marcador .valor {
+    font-size: 0.85rem;
+  }
+
+  #siguiente {
+    width: 70px;
+    height: 70px;
+  }
+
+  .boton-tema,
+  .boton-idioma {
+    padding: 3px 6px;
+    font-size: 0.7rem;
+  }
+
+  #menu-principal {
+    padding: 20px 16px;
+    width: 92vw;
+  }
+
+  .titulo-arcade {
+    font-size: 1.4rem;
+  }
+}
